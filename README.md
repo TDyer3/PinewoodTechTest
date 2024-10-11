@@ -1,6 +1,8 @@
 # PinewoodTechTest
 Technical Test for Pinewood Technologies
 
+NOTE: You MUST use an up-to-date Visual Studio 2022 to run the following as this allows for targeting .NET 8.
+
 Before Running:
 
 - Ensure the Port Number '5136' is allowed by your firewall and if not then either allow it or change it in both the UI project (Program.cs) and API project (launchsettings.json) to your preferred Port.
