@@ -1,0 +1,59 @@
+﻿@page
+@using CustomersAPI.Models
+@using CustomersUI.Clients
+@model IndexModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewBag.Title = "Customers";
+}
+
+@* Customer Details and Actions *@
+<table class="table">
+    <thead>
+        <tr>
+            <th hidden>@Html.DisplayNameFor(model => model.Customers[0].Id)</th>
+            <th>@Html.DisplayNameFor(model => model.Customers[0].Name)</th>
+            <th>@Html.DisplayNameFor(model => model.Customers[0].Address)</th>
+            <th>@Html.DisplayNameFor(model => model.Customers[0].ContactNo)</th>
+            <th>@Html.DisplayNameFor(model => model.Customers[0].Email)</th>
+            <th>@Html.DisplayNameFor(model => model.Customers[0].IsActive)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Customers is not null)
+        {
+            @foreach (var customer in Model.Customers)
+            {
+                <tr>
+                    <form method="post" class="form-control">
+                    <td hidden><input asp-for="Customer!.Id" value="@customer.Id" /></td>
+                    <td><input type="text" asp-for="Customer!.Name" maxlength="15" value="@customer.Name" required/></td>
+                    <td><input type="text" asp-for="Customer!.Address" maxlength="30" value="@customer.Address" /></td>
+                    <td><input type="text" asp-for="Customer!.ContactNo" max-length="11" value="@customer.ContactNo" /></td>
+                    <td><input type="text" asp-for="Customer!.Email" max-length="30" value="@customer.Email" /></td>
+                    <td><input type="checkbox" asp-for="Customer!.IsActive" checked="@customer.IsActive" /></td>
+                    <td><input type="submit" value="Update" asp-page-handler="Update" /></td>
+                    <td><input type="submit" value="Delete" asp-page-handler="Delete" /></td>
+                    </form>
+                </tr>
+            }
+        }
+        <tr>
+            <form method="post" class="form-control">
+                <td hidden></td>
+                <td><input type="text" max-length="15" asp-for="Customer!.Name" required/></td>
+                <td><input type="text" maxlength="30" asp-for="Customer!.Address"/></td>
+                <td><input type="text" max-length="11" asp-for="Customer!.ContactNo"/></td>
+                <td><input type="text" max-length="30" asp-for="Customer!.Email"/></td>
+                <td><input type="checkbox" asp-for="Customer!.IsActive"/></td>
+                <td><input type="submit" value="Add" asp-page-handler=""/></td>
+            </form>
+        </tr>
+    </tbody>
+</table>
+
+<br/>
+
+<p style="color: orangered">@Model.CurrentErrorMessage</p>
